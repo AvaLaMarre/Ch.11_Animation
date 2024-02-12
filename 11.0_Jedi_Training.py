@@ -1,3 +1,5 @@
+import arcade
+import random
 '''
 # 11.0 Jedi Training (50pts)  Name:________________
 
@@ -79,3 +81,26 @@ the following requirements:
 9.) Color snowflake #1 red just for fun.
 10.) All other snowflakes should be white.
 '''
+SW= 600
+SH = 600
+class MyGame(arcade.Window):
+    def __init__(self, width, height, title):
+        super().__init__(width, height, title)
+        arcade.set_background_color(arcade.color.PINK)
+        self.x = width/2
+        self.y = height/2
+        self.vy = random.randint(-2, 2)
+
+    def on_draw(self):
+        arcade.start_render()
+        arcade.draw_circle_filled(self.x, self.y, 15, arcade.color.BANANA_MANIA)
+
+    def on_update(self, dt):
+        self.y += self.vy
+def main():
+    window =MyGame(SW, SH, "Drawing Example")
+    arcade.run()
+
+
+if __name__ == "__main__":
+    main()
