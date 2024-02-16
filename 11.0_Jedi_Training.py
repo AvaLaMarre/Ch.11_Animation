@@ -29,11 +29,6 @@ CHAPTER 11 FINAL CODE QUESTIONS: (10pts)
 10.) What is this code checking? if self.pos_x < self.rad
 '''
 
-
-
-
-
-
 '''
 30 BOX BOUNCE PROGRAM (20pts)
 ---------------------
@@ -60,10 +55,6 @@ Helpful Hints:
 '''
 
 
-
-
-
-
 '''
 SNOWFALL  (20pts)
 --------
@@ -81,24 +72,58 @@ the following requirements:
 9.) Color snowflake #1 red just for fun.
 10.) All other snowflakes should be white.
 '''
-SW= 600
+
+SW = 600
 SH = 600
+
+
+class Ball:
+    def __init__(self, x, y, vy, rad, col):
+        self.x = x
+        self.y = y
+        self.vy = vy
+        self.rad = rad
+        self.color = col
+
+    def draw_ball(self):
+        arcade.draw_circle_filled(self.x, self.y, self.rad, self.color)
+
+    def update_ball(self):
+        self.y += self.vy
+        if self.y <= self.rad:
+            self.y = 600
+
+
 class MyGame(arcade.Window):
     def __init__(self, width, height, title):
         super().__init__(width, height, title)
-        arcade.set_background_color(arcade.color.PINK)
-        self.x = width/2
-        self.y = height/2
-        self.vy = random.randint(-2, 2)
+        arcade.set_background_color(arcade.color.BLACK)
+        self.ball_list = []
+        for i in range(300):
+            radius = random.randint(1, 3)
+            velocity_y = random.randint(-4, -1)
+            pos_x = random.randint(0, 600)
+            pos_y = random.randint(600, 800)
+            color = arcade.color.WHITE
+            if i == 3:
+                color = arcade.color.RED
+            self.ball = Ball(pos_x, pos_y, velocity_y, radius, color)
+            self.ball_list.append(self.ball)
 
     def on_draw(self):
         arcade.start_render()
-        arcade.draw_circle_filled(self.x, self.y, 15, arcade.color.BANANA_MANIA)
+        for ball in self.ball_list:
+            ball.draw_ball()
+        arcade.draw_rectangle_filled(SW / 2, SH / 2, 10, SH, arcade.color.BROWN)
+        arcade.draw_rectangle_filled(SW / 2, SH / 2, SW, 10, arcade.color.BROWN)
 
     def on_update(self, dt):
-        self.y += self.vy
+        for ball in self.ball_list:
+            ball.update_ball()
+
+
 def main():
-    window =MyGame(SW, SH, "Drawing Example")
+    window = MyGame(SW, SH, "SnowFall")
     arcade.run()
 
 
