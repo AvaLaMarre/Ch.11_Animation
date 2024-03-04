@@ -10,7 +10,7 @@ import random
 CHAPTER 11 FINAL CODE QUESTIONS: (10pts)
 --------------------------------
 1.) Where is the ball's original location?
-
+    
 2.) What are the variables dx and dy?
     The velocity.
 3.) How many pixels/sec does the ball move in the x-direction?
@@ -26,9 +26,9 @@ CHAPTER 11 FINAL CODE QUESTIONS: (10pts)
 8.) What is the width of the window?
     600 pixels
 9.) What is this code checking?  self.pos_y > SH - self.rad:
-    If the object is toching the y borders
+    If the object is touching the y borders
 10.) What is this code checking? if self.pos_x < self.rad
-    if the object is toching the x borders
+    if the object is touching the x borders
 '''
 
 '''
@@ -128,7 +128,6 @@ class MyGame(arcade.Window):
     def on_update(self, dt):
         for box in self.box_list:
             box.update_box()
-
 
 
 def main():
